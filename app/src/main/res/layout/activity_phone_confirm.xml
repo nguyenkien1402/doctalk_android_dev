@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/ToolbarStyle">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:paddingStart="@dimen/ic_nav_padding_start"
+                android:src="@drawable/ic_back" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:id="@+id/containerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_margin="@dimen/container_layout_margin">
+
+            <TextView
+                android:id="@+id/phone_login_title"
+                style="@style/LabelStyle"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:text="@string/verify_phonenumber_code"
+                android:textColor="@color/orange" />
+
+
+            <EditText
+                android:id="@+id/ed_phone_code"
+                style="@style/EditTextStyle"
+                android:layout_below="@id/phone_login_title"
+                android:layout_marginTop="@dimen/layout_in_between_margins"
+                android:hint="@string/enter_phonenumber_code"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/phone_resend_code"
+                style="@style/LabelStyle"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/ed_phone_code"
+                android:layout_marginTop="@dimen/layout_in_between_margins"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:text="@string/resend_code"
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_phone_nex_login"
+                android:onClick="registerPatient"
+                style="@style/SolidButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_below="@id/phone_resend_code"
+                android:layout_marginTop="@dimen/layout_in_between_margins"
+                android:text="@string/signup_btn_next" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

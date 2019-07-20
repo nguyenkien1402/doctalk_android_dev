@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "314573789532",
+    "firebase_url": "https://doctalk-dev.firebaseio.com",
+    "project_id": "doctalk-dev",
+    "storage_bucket": "doctalk-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314573789532:android:e66111ad3c5e20b9",
+        "android_client_info": {
+          "package_name": "com.mobile.docktalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314573789532-gainm1cqu95edfl6ski5qu1hm8npdsvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXbhHP0yYpdlxGzLo4Ks6OD1pW1TJsO2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314573789532-gainm1cqu95edfl6ski5qu1hm8npdsvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

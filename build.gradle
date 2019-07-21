@@ -19,10 +19,50 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://github.com/QuickBlox/quickblox-android-sdk-releases/raw/master/"
+        }
         
     }
 }
 
+ext {
+
+    lintAbortOnError = false
+
+    dimensionDefault = 'default'
+
+    lintAbortOnError = false
+
+    // QuickBlox SDK version
+    qbSdkVersion = '3.9.1'
+
+    //Android X
+    fragmentAndroidXVersion = '1.0.0'
+    lifecycleViewmodelAndroidXVersion = '1.0.0'
+    coreKtxVersion = '1.0.1'
+
+    //RobotoTextView
+    robotoTextViewVersion = '4.0.0'
+
+    //Glide
+    glideVersion = '3.6.1'
+
+    //CircleImageView
+    circleImageVersion = "2.1.0"
+
+    //StickyListenerHeaders
+    stickylistheadersVersion = '0.4.2'
+
+    //Swipy
+    swipyVersion = '1.2.3'
+
+    //Crashlytics
+    crashlyticsVersion = '2.9.5'
+
+    //Fabric
+    fabricToolsVersion = '1.27.0'
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

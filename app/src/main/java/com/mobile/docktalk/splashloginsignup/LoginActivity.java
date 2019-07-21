@@ -6,21 +6,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.LayoutInflaterCompat;
-import androidx.databinding.DataBindingUtil;
 
-import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import com.mobile.docktalk.FirebaseUploadDemo;
 import com.mobile.docktalk.R;
-import com.mobile.docktalk.databinding.ActivityLoginBinding;
+import com.mobile.docktalk.databinding.ActivityLoginAppBinding;
 
 public class LoginActivity extends AppCompatActivity {
-    ActivityLoginBinding binding;
+    ActivityLoginAppBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_app);
 
     }
 

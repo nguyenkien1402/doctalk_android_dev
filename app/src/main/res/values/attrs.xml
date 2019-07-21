@@ -9,4 +9,15 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <!-- Add for Quickblox Chat -->
+    <declare-styleable name="MaskedImageView">
+        <attr name="mask" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MessageTextView">
+        <attr name="widget_id_top" format="integer" />
+        <attr name="widget_id_bottom" format="integer" />
+        <attr name="widget_id_link_preview" format="integer" />
+    </declare-styleable>
+
 </resources>

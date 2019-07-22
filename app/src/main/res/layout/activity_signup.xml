@@ -40,7 +40,7 @@
                 android:text="@string/signup_welcome_txt" />
 
             <EditText
-                android:id="@+id/et_full_name"
+                android:id="@+id/signup_username"
                 style="@style/EditTextStyle"
                 android:layout_below="@id/signup_welcome_msg"
                 android:layout_marginTop="16dp"
@@ -48,40 +48,40 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/et_email_address"
+                android:id="@+id/signup_email_address"
                 style="@style/EditTextStyle"
-                android:layout_below="@id/et_full_name"
+                android:layout_below="@id/signup_username"
                 android:layout_marginTop="16dp"
                 android:hint="@string/email_address_hint"
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/signup_password"
                 style="@style/EditTextStyle"
-                android:layout_below="@id/et_email_address"
+                android:layout_below="@id/signup_email_address"
                 android:layout_marginTop="16dp"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword" />
             <EditText
-                android:id="@+id/et_confirm_password"
+                android:id="@+id/signup_confirm_password"
                 style="@style/EditTextStyle"
-                android:layout_below="@id/et_password"
+                android:layout_below="@id/signup_password"
                 android:layout_marginTop="16dp"
                 android:hint="@string/confirm_password_hint"
                 android:inputType="textPassword" />
             <EditText
-                android:layout_below="@id/et_confirm_password"
-                android:id="@+id/et_phonenumber"
+                android:layout_below="@id/signup_confirm_password"
+                android:id="@+id/signup_phonenumber"
                 style="@style/EditTextStyle"
                 android:layout_marginTop="16dp"
                 android:hint="@string/phonenumber_hind"
-                android:inputType="textPassword" />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/btn_signup"
                 style="@style/SolidButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_below="@id/et_phonenumber"
+                android:layout_below="@id/signup_phonenumber"
                 android:layout_marginTop="20dp"
                 android:onClick="confirmPhonenumber"
                 android:text="@string/signup_btn_next" />

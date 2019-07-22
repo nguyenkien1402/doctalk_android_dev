@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DocTalkAndroid_Dev</string>
+    <string name="app_name">DocTalk</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>

@@ -1,5 +1,6 @@
 package com.mobile.docktalk.splashloginsignup;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import androidx.core.view.LayoutInflaterCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.mikepenz.iconics.context.IconicsLayoutInflater2;
+import com.mobile.docktalk.MainActivity;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.AccountController;
 import com.mobile.docktalk.databinding.ActivityRegisterPatientBinding;
@@ -31,8 +33,8 @@ public class RegisterPatientActivity extends AppCompatActivity {
             edPatientAddress, edPatientSuburb, edPatientState, edPatientPostCode;
     String firstName, lastName, preferName, address, suburb, state, postcode;
     Button btnPatientSignup;
-    String mobile_token;
     JSONObject user = new JSONObject();
+    private String userId = null, token = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,45 +50,41 @@ public class RegisterPatientActivity extends AppCompatActivity {
         edPatientPostCode = (EditText)findViewById(R.id.patient_postcode);
 
         btnPatientSignup = (Button) findViewById(R.id.btn_patient_signup);
-        // get json user first
-//        try{
-//            user = new JSONObject(getIntent().getExtras().getString("user"));
-//        }catch (JSONException e){
-//            Log.e("Failure JSon","Failed to parse the JSON");
-//        }
+        //get json user first
+        userId = getIntent().getStringExtra("Id");
+        token = getIntent().getStringExtra("Token");
 
 
         btnPatientSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get Token first
-//                firstName = edPatientFirstName.getText().toString();
-//                lastName = edPatientLastName.getText().toString();
-//                preferName = edPatientPreferName.getText().toString();
-//                address = edPatientAddress.getText().toString();
-//                suburb = edPatientSuburb.getText().toString();
-//                state = edPatientState.getText().toString();
-//                postcode = edPatientPostCode.getText().toString();
-                firstName = "Laolao";
-                lastName = "DaoDao";
-                preferName = "LaoDao";
-                address = "Caulfield";
-                suburb = "Caulfield";
-                state = "VIC";
-                postcode = "3145";
+                firstName = edPatientFirstName.getText().toString();
+                lastName = edPatientLastName.getText().toString();
+                preferName = edPatientPreferName.getText().toString();
+                address = edPatientAddress.getText().toString();
+                suburb = edPatientSuburb.getText().toString();
+                state = edPatientState.getText().toString();
+                postcode = edPatientPostCode.getText().toString();
+//                firstName = "Laolao";
+//                lastName = "DaoDao";
+//                preferName = "LaoDao";
+//                address = "Caulfield";
+//                suburb = "Caulfield";
+//                state = "VIC";
+//                postcode = "3145";
                 try {
-                    user.put("Id","51a63d74-59d0-4f12-8f0b-fdeccef2f301");
-                    user.put("username","llao");
-                    user.put("password","Pass123$");
-                    user.put("firstname", firstName);
-                    user.put("lastname", lastName);
-                    user.put("prefername", preferName);
-                    user.put("address",address);
-                    user.put("suburb",suburb);
-                    user.put("state",state);
-                    user.put("postcode",postcode);
-                    GetTokenAsyn getTokenAsyn = new GetTokenAsyn();
-                    getTokenAsyn.execute(user);
+                    user.put("UserId",userId);
+                    user.put("FirstName",firstName);
+                    user.put("Paddress", address);
+                    user.put("LastName", lastName);
+                    user.put("PreferName", preferName);
+                    user.put("PostCode",postcode);
+                    user.put("Suburb",suburb);
+                    user.put("Pstate",state);
+
+                    SignupAsPatient signupAsPatient = new SignupAsPatient();
+                    signupAsPatient.execute(user);
                 }catch (Exception e){
                     e.getMessage();
                 }
@@ -94,34 +92,53 @@ public class RegisterPatientActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-    private class GetTokenAsyn extends AsyncTask<JSONObject, Void, JSONObject>{
-
+    private class SignupAsPatient extends AsyncTask<JSONObject, Void, JSONObject>{
         @Override
         protected JSONObject doInBackground(JSONObject... jsonObjects) {
-            JSONObject user = jsonObjects[0];
-            String token = null;
-            try {
-                token = AccountController.getTokenMobile(user.getString("username"), user.getString("password"));
-            }catch (Exception e){
-                Log.e("Exception","No appropriate key");
-            }
-            if(token != null){
-                JSONObject jsonPatient = AccountController.registerAsPatient(token, user);
-                return jsonPatient;
-            }else{
-                return null;
-            }
+            JSONObject patient = jsonObjects[0];
+            return AccountController.registerAsPatient(token,patient);
         }
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            Log.d("patient",jsonObject.toString());
+            try{
+               if(jsonObject != null){
+                   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                   startActivity(intent);
+               }
+            }catch (Exception e){
+                Log.d("Error",e.getMessage());
+            }
         }
     }
+
+
+//    private class GetTokenAsyn extends AsyncTask<JSONObject, Void, JSONObject>{
+//
+//        @Override
+//        protected JSONObject doInBackground(JSONObject... jsonObjects) {
+//            JSONObject user = jsonObjects[0];
+//            String token = null;
+//            try {
+//                token = AccountController.getTokenMobile(user.getString("username"), user.getString("password"));
+//            }catch (Exception e){
+//                Log.e("Exception","No appropriate key");
+//            }
+//            if(token != null){
+//                JSONObject jsonPatient = AccountController.registerAsPatient(token, user);
+//                return jsonPatient;
+//            }else{
+//                return null;
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(JSONObject jsonObject) {
+//            super.onPostExecute(jsonObject);
+//            Log.d("patient",jsonObject.toString());
+//        }
+//    }
 
 
     @Override

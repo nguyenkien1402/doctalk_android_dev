@@ -78,7 +78,7 @@
                 android:inputType="text" />
 
             <Button
-                android:id="@+id/btn_signup"
+                android:id="@+id/btn_singup_phone_next"
                 style="@style/SolidButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_below="@id/signup_phonenumber"

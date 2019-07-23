@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/ToolbarStyle">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:paddingStart="@dimen/ic_nav_padding_start"
+                android:src="@drawable/ic_back" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:id="@+id/containerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_margin="@dimen/container_layout_margin">
+
+            <TextView
+                android:id="@+id/doctor_detail_signup_title"
+                style="@style/LabelStyle"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:text="Add Professional"
+                android:textColor="@color/orange" />
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/doctor_detail_greeting"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_below="@id/doctor_detail_signup_title"
+                android:layout_height="wrap_content"
+                android:text="Tell me more about you"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/doctor_detail_greeting"
+                android:layout_width="match_parent"
+                android:id="@+id/doctor_detail_form_wrap"
+                android:hint="Tell me"
+                android:layout_height="300dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/doctor_detail_form_ps"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/doctor_selection"
+                android:layout_below="@id/doctor_detail_form_wrap"
+                android:layout_width="match_parent"
+                style="@style/EditTextStyle"
+                android:hint="Enter Selection Code"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_add_doctor_professional"
+                style="@style/SolidButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_below="@id/doctor_selection"
+                android:layout_marginTop="20dp"
+                android:text="Send Request" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

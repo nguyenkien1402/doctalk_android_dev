@@ -1,35 +1,48 @@
 package com.mobile.docktalk;
 
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
-
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mobile.docktalk.apiconsumption.AccountController;
+
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
+    private String userId;
+    private String token;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
+                    fragment = new HomePageFragmentFirst();
+                    break;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
+                    fragment = new HomePageFragmentSecond();
+                    break;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
+                    fragment = new HomePageFragmentThird();
+                    break;
             }
-            return false;
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            return true;
         }
     };
 
@@ -38,8 +51,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame,new HomePageFragmentThird()).commit();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("UserInfo",MODE_PRIVATE);
+        userId = pref.getString("UserId",null);
+        token = pref.getString("Token",null);
+
+        //Get Patient Info
+        GetPatientInfo getPatientInfo = new GetPatientInfo();
+        getPatientInfo.execute();
+    }
+
+    private class GetPatientInfo extends AsyncTask<Void, Void, JSONObject>{
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+            JSONObject result = AccountController.getPatientInfo(userId,token);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            // Do something with the result here
+            Log.d("patient",jsonObject.toString());
+        }
     }
 
 }

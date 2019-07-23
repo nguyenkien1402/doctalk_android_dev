@@ -18,7 +18,7 @@ import com.mobile.docktalk.databinding.ActivitySignupBinding;
 public class SignupActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
     EditText edUsername, edEmail, edPasssword, edConfirmPassword, edPhoneNumber;
-    Button btnSignup;
+    Button btnPhoneNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +30,9 @@ public class SignupActivity extends AppCompatActivity {
         edPasssword = (EditText) findViewById(R.id.signup_password);
         edConfirmPassword = (EditText) findViewById(R.id.signup_confirm_password);
         edPhoneNumber = (EditText) findViewById(R.id.signup_phonenumber);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
+        btnPhoneNext = (Button) findViewById(R.id.btn_singup_phone_next);
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        btnPhoneNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignupActivity.this, PhoneNumberConfirmActivity.class);
@@ -52,9 +52,7 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    public void confirmPhonenumber(View view){
-        startActivity(new Intent(this, PhoneNumberConfirmActivity.class));
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,6 +1,7 @@
 package com.mobile.docktalk.splashloginsignup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.AccountController;
+import com.mobile.docktalk.apiconsumption.UtilityController;
 import com.mobile.docktalk.databinding.ActivityPhoneConfirmBinding;
 
 import org.json.JSONObject;
@@ -137,10 +139,15 @@ public class PhoneNumberConfirmActivity extends AppCompatActivity {
     }
 
     private class UserSignupAsyn extends AsyncTask<Void, Void, JSONObject>{
-
         @Override
         protected JSONObject doInBackground(Void... voids) {
             JSONObject result = AccountController.signup(email,username,password,phoneNumber);
+            String token = UtilityController.getTokenMobile(username,password);
+            try{
+                result.put("Token",token);
+            }catch (Exception e){
+                Log.d("Error","Parsing error");
+            }
             return result;
         }
 
@@ -148,13 +155,26 @@ public class PhoneNumberConfirmActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject jsonObject) {
             if(jsonObject != null){
                 // Start a new Activity to Patient Signup
-                Bundle bundle = new Bundle();
-                bundle.putString("user",jsonObject.toString());
-                Intent intent = new Intent(getApplicationContext(),RegisterPatientActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(getApplicationContext(), RegisterPatientActivity.class);
+                    intent.putExtra("Id",jsonObject.getString("id"));
+                    intent.putExtra("Token",jsonObject.getString("Token"));
+                    //Save on Sharepreferences
+                    saveUserInfoInDevice(jsonObject.getString("id"), jsonObject.getString("Token"));
+                    startActivity(intent);
+                }catch (Exception e){
+                    Log.d("Error",e.getMessage());
+                }
             }
         }
+    }
+
+    private void saveUserInfoInDevice(String userId, String token){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("UserInfo",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("UserId",userId);
+        editor.putString("Token",token);
+        editor.commit();
     }
 
 

@@ -81,14 +81,14 @@ public class AccountController {
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         JSONObject newPatient = new JSONObject();
         try{
-            newPatient.put("UserId",user.getString("Id"));
-            newPatient.put("FirstName",user.getString("firstname"));
-            newPatient.put("LastName",user.getString("lastname"));
-            newPatient.put("PreferName",user.getString("prefername"));
-            newPatient.put("Paddress",user.getString("address"));
-            newPatient.put("Suburb",user.getString("suburb"));
-            newPatient.put("Pstate",user.getString("state"));
-            newPatient.put("PostCode",user.getString("postcode"));
+            newPatient.put("UserId",user.getString("UserId"));
+            newPatient.put("FirstName",user.getString("FirstName"));
+            newPatient.put("LastName",user.getString("LastName"));
+            newPatient.put("PreferName",user.getString("PreferName"));
+            newPatient.put("Paddress",user.getString("Paddress"));
+            newPatient.put("Suburb",user.getString("Suburb"));
+            newPatient.put("Pstate",user.getString("Pstate"));
+            newPatient.put("PostCode",user.getString("PostCode"));
         }catch (JSONException e){
             Log.e("Parse JSON Error", e.getMessage());
         }
@@ -111,5 +111,65 @@ public class AccountController {
             Log.d("Failure response",e.getMessage());
         }
         return result;
+    }
+
+    public static JSONObject registerAsDoctor(String token, JSONObject user){
+        JSONObject result = null;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        JSONObject newDoctor = new JSONObject();
+        try{
+            newDoctor.put("UserId",user.getString("Id"));
+            newDoctor.put("FirstName",user.getString("FirstName"));
+            newDoctor.put("LastName",user.getString("LastName"));
+            newDoctor.put("PreferName",user.getString("PreferName"));
+            newDoctor.put("ClinicName",user.getString("ClinicName"));
+            newDoctor.put("ClinicAddress",user.getString("ClinicAddress"));
+            newDoctor.put("ClinicSuburb",user.getString("ClinicSuburb"));
+            newDoctor.put("ClinicPostCode",user.getString("ClinicPostCode"));
+            newDoctor.put("ClinicState",user.getString("ClinicState"));
+
+        }catch (JSONException e){
+            Log.e("Parse JSON Error", e.getMessage());
+        }
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, newDoctor.toString());
+        Request request = new Request.Builder()
+                .url(EndPointAPIs.register_doctor)
+                .post(body)
+                .addHeader("Authorization","Bearer "+token)
+                .addHeader("Content-Type","application/json")
+                .build();
+        try{
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                result = new JSONObject(response.body().string());
+            }else{
+                Log.d("Failure response","Something went wrong");
+            }
+        }catch (Exception e){
+            Log.d("Failure response",e.getMessage());
+        }
+        return result;
+    }
+
+    public static JSONObject getPatientInfo(String userId, String token){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String url = EndPointAPIs.get_patient_info + userId;
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader("Authorization","Bearer "+token)
+                .addHeader("Content-Type","application/json")
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                return new JSONObject(response.body().string());
+            }
+        }catch (Exception e){
+            Log.d("Error",e.getMessage());
+        }
+        return null;
     }
 }

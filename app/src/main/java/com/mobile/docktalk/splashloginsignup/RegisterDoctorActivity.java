@@ -1,6 +1,7 @@
 package com.mobile.docktalk.splashloginsignup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,7 @@ public class RegisterDoctorActivity extends AppCompatActivity {
     ActivityRegisterDoctorBinding binding;
     Button btnDoctorNext;
     EditText edDoctorTitle, edDoctorPreferName, edDoctorHospital, edDoctorAddress,edDoctorSuburb, edDoctorState, edDoctorPostCode;
-
+    String userId, token;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
@@ -40,6 +41,13 @@ public class RegisterDoctorActivity extends AppCompatActivity {
         edDoctorPostCode = (EditText) findViewById(R.id.doctor_postcode);
         btnDoctorNext = (Button) findViewById(R.id.btn_doctor_signup);
 
+        // Get userId and token from Sharepreferences
+        final SharedPreferences pref = getSharedPreferences("UserInfo",MODE_PRIVATE);
+        userId = pref.getString("UserId",null);
+        token = pref.getString("Token", null);
+
+        //get the Patient Information
+
         btnDoctorNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,29 +58,18 @@ public class RegisterDoctorActivity extends AppCompatActivity {
                 String suburb = edDoctorSuburb.getText().toString();
                 String state = edDoctorState.getText().toString();
                 String postcode = edDoctorPostCode.getText().toString();
-
-                address = "Caulfield";
-                title = "Dr";
-                preferName = title + "Bob";
-                hospital = "Monash";
-                suburb = "Clayton";
-                state = "VIC";
-                postcode = "3146";
-
                 try {
                     JSONObject doctor = new JSONObject();
-                    doctor.put("UserId","d31eac6d-6849-49b4-be3c-d05a25a3d8c4");
-                    doctor.put("FirstName","bob");
-                    doctor.put("LastName","bob");
-                    doctor.put("PreferName",preferName);
+                    doctor.put("UserId",userId);
+                    doctor.put("Title",title);
+                    doctor.put("FirstName",pref.getString("FirstName", null));
+                    doctor.put("LastName",pref.getString("LastName", null));
+                    doctor.put("PreferName",title + "."+preferName);
                     doctor.put("ClinicName",hospital);
                     doctor.put("ClinicAddress",address);
                     doctor.put("ClinicSuburb",suburb);
                     doctor.put("ClinicState",state);
                     doctor.put("ClinicPostCode",postcode);
-                    doctor.put("username","bob");
-                    doctor.put("password","Pass123$");
-
                     GetTokenAsyn getTokenAsyn = new GetTokenAsyn();
                     getTokenAsyn.execute(doctor);
                 }catch (Exception e){
@@ -88,16 +85,11 @@ public class RegisterDoctorActivity extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(JSONObject... jsonObjects) {
             JSONObject user = jsonObjects[0];
-            String token = null;
-            try {
-                token = AccountController.getTokenMobile(user.getString("username"), user.getString("password"));
-            }catch (Exception e){
-                Log.e("Exception","No appropriate key");
-            }
             if(token != null){
                 JSONObject jsonPatient = AccountController.registerAsDoctor(token, user);
                 return jsonPatient;
             }else{
+                Log.d("Token","Token is null");
                 return null;
             }
         }
@@ -105,7 +97,15 @@ public class RegisterDoctorActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-            Log.d("patient",jsonObject.toString());
+            try {
+                Log.d("patient", jsonObject.toString());
+                int doctorId = jsonObject.getInt("Id");
+                Intent intent = new Intent(getApplicationContext(),RegisterDoctorDetailActivity.class);
+                intent.putExtra("DoctorId",doctorId);
+                startActivity(intent);
+            }catch (Exception e){
+                Log.d("Error","Cannot get the JSON attribute");
+            }
         }
     }
     public void doctorDetail(View view){

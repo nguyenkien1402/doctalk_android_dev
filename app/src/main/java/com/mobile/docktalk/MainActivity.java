@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame,new HomePageFragmentThird()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame,new HomePageFragmentFirst()).commit();
         SharedPreferences pref = getApplicationContext().getSharedPreferences("UserInfo",MODE_PRIVATE);
         userId = pref.getString("UserId",null);
         token = pref.getString("Token",null);
@@ -75,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
             // Do something with the result here
+            SharedPreferences pref = getSharedPreferences("UserInfo",MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            try {
+                editor.putString("FirstName", jsonObject.getString("FirstName"));
+                editor.putString("LastName", jsonObject.getString("LastName"));
+                editor.commit();
+            }catch (Exception e){
+                Log.d("Error","Error at getting JSON object");
+            }
             Log.d("patient",jsonObject.toString());
         }
     }

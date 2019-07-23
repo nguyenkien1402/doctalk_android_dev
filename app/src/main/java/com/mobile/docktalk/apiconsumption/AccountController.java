@@ -119,7 +119,7 @@ public class AccountController {
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         JSONObject newDoctor = new JSONObject();
         try{
-            newDoctor.put("UserId",user.getString("Id"));
+            newDoctor.put("UserId",user.getString("UserId"));
             newDoctor.put("FirstName",user.getString("FirstName"));
             newDoctor.put("LastName",user.getString("LastName"));
             newDoctor.put("PreferName",user.getString("PreferName"));
@@ -128,7 +128,7 @@ public class AccountController {
             newDoctor.put("ClinicSuburb",user.getString("ClinicSuburb"));
             newDoctor.put("ClinicPostCode",user.getString("ClinicPostCode"));
             newDoctor.put("ClinicState",user.getString("ClinicState"));
-
+            newDoctor.put("Title",user.getString("Title"));
         }catch (JSONException e){
             Log.e("Parse JSON Error", e.getMessage());
         }

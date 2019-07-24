@@ -12,8 +12,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ProfessionalController {
@@ -42,5 +44,40 @@ public class ProfessionalController {
             Log.d("Error","Failed to get response");
         }
         return result;
+    }
+
+    public static JSONObject addProfessionalToDoctor(String token, int doctorId, List<Integer> professionalIds){
+        Log.d("Token",token);
+        Log.d("DoctorId",doctorId+"");
+        Log.d("Id",professionalIds.get(0)+"");
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String url = EndPointAPIs.adding_doctor_professional;
+        Log.d("URL",url);
+        JSONObject dp = new JSONObject();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        try{
+            // Convert professionalIds to JSONArray
+            JSONArray jsonArray = new JSONArray();
+            for(int id : professionalIds){
+                jsonArray.put(id);
+            }
+            dp.put("DoctorId",doctorId);
+            dp.put("ProfessionalId",jsonArray);
+            Log.d("JSON File",dp.toString());
+            RequestBody body = RequestBody.create(MEDIA_TYPE, dp.toString());
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .addHeader("Authorization","Bearer "+token)
+                    .addHeader("Content-Type","application/json")
+                    .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                return new JSONObject(response.body().string());
+            }
+        }catch (Exception e){
+            Log.e("Error",e.getMessage());
+        }
+        return null;
     }
 }

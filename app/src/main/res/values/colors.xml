@@ -76,4 +76,6 @@
     <color name="progress_secondary_end">#a24</color>
     <color name="progress_secondary_start">#234</color>
 
+    <color name="colorControlActivated">#50FF4081</color>
+    <color name="colorActionMode">#009362</color>
 </resources>

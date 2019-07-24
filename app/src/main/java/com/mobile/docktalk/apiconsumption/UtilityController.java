@@ -40,7 +40,7 @@ public class UtilityController {
         return token;
     }
 
-    public static String getUserTokenInfo(String token){
+    public static JSONObject getUserTokenInfo(String token){
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                             .url(EndPointAPIs.get_user_token_info)
@@ -51,8 +51,7 @@ public class UtilityController {
             Response response = okHttpClient.newCall(request).execute();
             if(response.code() == 200){
                 JSONObject result = new JSONObject(response.body().string());
-                String userId = result.getString("sub");
-                return userId;
+                return result;
             }
         }catch (Exception e){
             Log.d("Utitility Controller",e.getMessage());

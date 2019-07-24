@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(Void... voids) {
             JSONObject result = AccountController.getPatientInfo(userId,token);
+            Log.d("Patient",result.toString());
             return result;
         }
 
@@ -78,8 +79,10 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences pref = getSharedPreferences("UserInfo",MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             try {
-                editor.putString("FirstName", jsonObject.getString("FirstName"));
-                editor.putString("LastName", jsonObject.getString("LastName"));
+                Log.d("FirstName",jsonObject.getString("firstName"));
+                Log.d("LastName",jsonObject.getString("lastName"));
+                editor.putString("FirstName", jsonObject.getString("firstName"));
+                editor.putString("LastName", jsonObject.getString("lastName"));
                 editor.commit();
             }catch (Exception e){
                 Log.d("Error","Error at getting JSON object");

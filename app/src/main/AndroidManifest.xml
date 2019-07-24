@@ -36,7 +36,7 @@
         </activity>-->
 
         <activity
-            android:name=".splashloginsignup.RegisterDoctorDetailActivity"
+            android:name=".splashloginsignup.SplashAppActivity"
             android:theme="@style/AppThemeFullScreen"
             android:label="@string/app_name">
             <intent-filter>
@@ -51,21 +51,20 @@
             android:theme="@style/AppThemeFullScreen"/>
         <activity android:name=".splashloginsignup.SignupActivity"
             android:theme="@style/AppThemeFullScreen"/>
-        <!--<activity android:name=".splashloginsignup.RegisterPatientActivity"-->
-            <!--android:theme="@style/AppThemeFullScreen"/>-->
         <activity android:name=".splashloginsignup.PhoneNumberConfirmActivity"
             android:theme="@style/AppThemeFullScreen"/>
         <activity android:name=".splashloginsignup.RegisterDoctorActivity"
             android:theme="@style/AppThemeFullScreen"/>
-        <!--<activity android:name=".splashloginsignup.RegisterDoctorDetailActivity"-->
-            <!--android:theme="@style/AppThemeFullScreen"/>-->
+        <activity android:name=".splashloginsignup.RegisterDoctorDetailActivity"
+            android:theme="@style/AppThemeFullScreen"/>
         <activity android:name=".FirebaseUploadDemo"
             android:theme="@style/AppThemeApp"/>
-        <!--<activity android:name=".MainActivity"-->
-            <!--android:theme="@style/AppThemeApp"/>-->
         <activity android:name=".splashloginsignup.RegisterPatientActivity"
             android:theme="@style/AppThemeFullScreen"/>
-
+        <activity android:name=".splashloginsignup.AddingDoctorProfessionalActivity"
+            android:theme="@style/AppThemeApp"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppThemeApp"/>
         <!-- Activity for Quickblox -->
 
         <activity

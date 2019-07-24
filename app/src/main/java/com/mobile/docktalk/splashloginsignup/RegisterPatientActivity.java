@@ -11,13 +11,11 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.LayoutInflaterCompat;
-import androidx.databinding.DataBindingUtil;
 
 import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import com.mobile.docktalk.MainActivity;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.AccountController;
-import com.mobile.docktalk.databinding.ActivityRegisterPatientBinding;
 
 import org.json.JSONObject;
 
@@ -28,7 +26,6 @@ public class RegisterPatientActivity extends AppCompatActivity {
     Then user the token to sign up as a patient.
      */
 
-    ActivityRegisterPatientBinding binding;
     EditText edPatientFirstName, edPatientLastName, edPatientPreferName,
             edPatientAddress, edPatientSuburb, edPatientState, edPatientPostCode;
     String firstName, lastName, preferName, address, suburb, state, postcode;
@@ -40,7 +37,8 @@ public class RegisterPatientActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_register_patient);
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_register_patient);
+        setContentView(R.layout.activity_register_patient);
         edPatientAddress = (EditText)findViewById(R.id.patient_address);
         edPatientFirstName = (EditText)findViewById(R.id.patient_first_name);
         edPatientLastName = (EditText)findViewById(R.id.patient_last_name);
@@ -66,13 +64,7 @@ public class RegisterPatientActivity extends AppCompatActivity {
                 suburb = edPatientSuburb.getText().toString();
                 state = edPatientState.getText().toString();
                 postcode = edPatientPostCode.getText().toString();
-//                firstName = "Laolao";
-//                lastName = "DaoDao";
-//                preferName = "LaoDao";
-//                address = "Caulfield";
-//                suburb = "Caulfield";
-//                state = "VIC";
-//                postcode = "3145";
+
                 try {
                     user.put("UserId",userId);
                     user.put("FirstName",firstName);

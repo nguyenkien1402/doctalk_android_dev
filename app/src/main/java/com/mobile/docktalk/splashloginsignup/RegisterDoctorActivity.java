@@ -11,27 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.LayoutInflaterCompat;
-import androidx.databinding.DataBindingUtil;
 
-import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.AccountController;
-import com.mobile.docktalk.databinding.ActivityRegisterDoctorBinding;
 
 import org.json.JSONObject;
 
 public class RegisterDoctorActivity extends AppCompatActivity {
 
-    ActivityRegisterDoctorBinding binding;
     Button btnDoctorNext;
     EditText edDoctorTitle, edDoctorPreferName, edDoctorHospital, edDoctorAddress,edDoctorSuburb, edDoctorState, edDoctorPostCode;
     String userId, token;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_register_doctor);
+        setContentView(R.layout.activity_register_doctor);
         edDoctorAddress = (EditText) findViewById(R.id.doctor_address);
         edDoctorTitle = (EditText) findViewById(R.id.doctor_title);
         edDoctorPreferName = (EditText) findViewById(R.id.doctor_prefer_name);
@@ -45,6 +39,7 @@ public class RegisterDoctorActivity extends AppCompatActivity {
         final SharedPreferences pref = getSharedPreferences("UserInfo",MODE_PRIVATE);
         userId = pref.getString("UserId",null);
         token = pref.getString("Token", null);
+
 
         //get the Patient Information
 
@@ -99,8 +94,8 @@ public class RegisterDoctorActivity extends AppCompatActivity {
             super.onPostExecute(jsonObject);
             try {
                 Log.d("patient", jsonObject.toString());
-                int doctorId = jsonObject.getInt("Id");
-                Intent intent = new Intent(getApplicationContext(),RegisterDoctorDetailActivity.class);
+                int doctorId = jsonObject.getInt("doctorId");
+                Intent intent = new Intent(getApplicationContext(),AddingDoctorProfessionalActivity.class);
                 intent.putExtra("DoctorId",doctorId);
                 startActivity(intent);
             }catch (Exception e){

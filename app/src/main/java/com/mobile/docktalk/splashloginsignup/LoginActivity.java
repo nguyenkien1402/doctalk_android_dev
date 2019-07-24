@@ -4,16 +4,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.mobile.docktalk.MainActivity;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.UtilityController;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
@@ -38,27 +47,50 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private class GetTokenAsync extends AsyncTask<String,Void, String> {
+    private class GetTokenAsync extends AsyncTask<String,Void, JSONObject> {
         @Override
-        protected String doInBackground(String... strings) {
+        protected JSONObject doInBackground(String... strings) {
             token = UtilityController.getTokenMobile(strings[0],strings[1]);
             saveUserInfoInDevice("Token",token);
-            String userId = UtilityController.getUserTokenInfo(token);
-            if(userId != null){
-                return userId;
+            JSONObject result = UtilityController.getUserTokenInfo(token);
+            if(result != null){
+                return result;
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String userId) {
-            super.onPostExecute(userId);
+        protected void onPostExecute(JSONObject result) {
+            super.onPostExecute(result);
             // save userId in sharepreference
-            saveUserInfoInDevice("UserId",userId);
+            try{
+                String userId = result.getString("sub");
+                String email = result.getString("email");
+                saveUserInfoInDevice("UserId",userId);
+                saveUserInfoInDevice("Email",email);
+                signinWithFirebase(email,edPassword.getText().toString());
+            }catch (Exception e){
+                Log.d("Error",e.getMessage());
+            }
             // start new activity
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+
         }
+    }
+
+    private void signinWithFirebase(String email, String password){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Cannot login to Firebase server",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void saveUserInfoInDevice(String key, String userId){

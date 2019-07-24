@@ -1,6 +1,7 @@
 package com.mobile.docktalk.splashloginsignup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,23 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.LayoutInflaterCompat;
-import androidx.databinding.DataBindingUtil;
 
-import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import com.mobile.docktalk.R;
-import com.mobile.docktalk.databinding.ActivitySignupBinding;
 
 public class SignupActivity extends AppCompatActivity {
-    ActivitySignupBinding binding;
     EditText edUsername, edEmail, edPasssword, edConfirmPassword, edPhoneNumber;
     Button btnPhoneNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
+//        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R .layout.activity_signup);
+//        binding = DataBindingUtil.setContentView(this, R .layout.activity_signup);
+        setContentView(R .layout.activity_signup);
         edUsername = (EditText) findViewById(R.id.signup_username);
         edEmail = (EditText) findViewById(R.id.signup_email_address);
         edPasssword = (EditText) findViewById(R.id.signup_password);
@@ -42,6 +39,12 @@ public class SignupActivity extends AppCompatActivity {
                 bundle.putString("password", edPasssword.getText().toString());
                 bundle.putString("phonenumber",edPhoneNumber.getText().toString());
                 intent.putExtras(bundle);
+
+                // Save email to Sharepreferences
+                SharedPreferences pref = getSharedPreferences("UserInfo",MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Email",edEmail.getText().toString());
+                editor.commit();
                 startActivity(intent);
             }
         });

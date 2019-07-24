@@ -24,7 +24,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.AccountController;
 import com.mobile.docktalk.apiconsumption.UtilityController;
-import com.mobile.docktalk.databinding.ActivityPhoneConfirmBinding;
 
 import org.json.JSONObject;
 
@@ -32,7 +31,6 @@ import java.util.concurrent.TimeUnit;
 
 public class PhoneNumberConfirmActivity extends AppCompatActivity {
 
-    ActivityPhoneConfirmBinding binding;
     Button btnNext;
     EditText edPhoneVerify;
     FirebaseAuth firebaseAuth;
@@ -99,6 +97,7 @@ public class PhoneNumberConfirmActivity extends AppCompatActivity {
         // verify code
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
         signInWithPhoneAuthCredential(credential);
+
     }
 
     private void signInWithPhoneAuthCredential(final PhoneAuthCredential credential){
@@ -117,7 +116,7 @@ public class PhoneNumberConfirmActivity extends AppCompatActivity {
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                                Log.d("Firebase","Link phonen number credential successfully");
+                                                Log.d("Firebase","Link phone number credential successfully");
                                                 addNewUserToDatabase();
                                             }
                                         });

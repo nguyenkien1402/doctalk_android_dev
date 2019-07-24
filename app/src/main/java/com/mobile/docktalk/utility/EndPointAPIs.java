@@ -7,10 +7,9 @@ public class EndPointAPIs {
     public static String register_patient = application_url + "api/account/register/patient";
     public static String register_doctor = application_url + "api/account/register/doctor";
     public static String get_token_mobile = application_url + "api/account/token/";
-    public static String get_professional_list = application_url + "api/professionals";
-    public static String adding_doctor_professional = application_url + "api/account/addprofessional";
     public static String get_user_token_info = account_url + "connect/userinfo";
     public static String get_patient_info = application_url +"api/patients/userid/";
     public static String get_doctor_info = application_url + "api/doctors/userid/";
     public static String professional_list = application_url + "api/professionals";
+    public static String adding_doctor_professional = application_url + "api/professionals/doctor/addpro";
 }

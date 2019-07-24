@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="actionModeBackground">@color/colorActionMode</item>
     </style>
 
     <style name="AppThemeFullScreen" parent="Theme.AppCompat.Light.NoActionBar">

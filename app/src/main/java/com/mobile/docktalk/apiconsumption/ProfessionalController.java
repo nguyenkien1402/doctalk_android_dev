@@ -47,12 +47,8 @@ public class ProfessionalController {
     }
 
     public static JSONObject addProfessionalToDoctor(String token, int doctorId, List<Integer> professionalIds){
-        Log.d("Token",token);
-        Log.d("DoctorId",doctorId+"");
-        Log.d("Id",professionalIds.get(0)+"");
         OkHttpClient okHttpClient = new OkHttpClient();
         String url = EndPointAPIs.adding_doctor_professional;
-        Log.d("URL",url);
         JSONObject dp = new JSONObject();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         try{

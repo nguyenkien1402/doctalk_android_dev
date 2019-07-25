@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ButtonChooseImage"
         android:layout_below="@+id/ShowImageView"
+        android:textSize="22dp"
         android:layout_marginTop="20dp"
         style="@style/Widget.MaterialComponents.Button"
         android:text="Choose Image"/>

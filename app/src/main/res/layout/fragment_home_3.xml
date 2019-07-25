@@ -8,6 +8,13 @@
         android:text="Register Doctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btntab3_register_doctor"
+        android:id="@+id/btntab3_update_doctor_image"
+        android:text="Update Doctor Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <TextView
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"

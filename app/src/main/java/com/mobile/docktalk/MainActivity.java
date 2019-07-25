@@ -1,5 +1,6 @@
 package com.mobile.docktalk;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_notifications:
                     fragment = new HomePageFragmentThird();
                     break;
+                case R.id.navigation_posting_request:
+                    Intent intent = new Intent(getApplicationContext(),PostingRequestConsultActivity.class);
+                    startActivity(intent);
+                    return true;
             }
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -83,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("LastName",jsonObject.getString("lastName"));
                 editor.putString("FirstName", jsonObject.getString("firstName"));
                 editor.putString("LastName", jsonObject.getString("lastName"));
+                editor.putInt("PatientId", jsonObject.getInt("id"));
                 editor.commit();
             }catch (Exception e){
                 Log.d("Error","Error at getting JSON object");

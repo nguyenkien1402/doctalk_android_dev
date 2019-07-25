@@ -11,4 +11,11 @@ public class SavingLocalData {
         editor.putString(key,value);
         editor.commit();
     }
+
+    public static void saveInSharePreferences(Context context,String name, String key, int value){
+        SharedPreferences pref = context.getSharedPreferences(name,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(key,value);
+        editor.commit();
+    }
 }

@@ -12,4 +12,5 @@ public class EndPointAPIs {
     public static String get_doctor_info = application_url + "api/doctors/userid/";
     public static String professional_list = application_url + "api/professionals";
     public static String adding_doctor_professional = application_url + "api/professionals/doctor/addpro";
+    public static String posting_question_consult = application_url + "api/requestconsult";
 }

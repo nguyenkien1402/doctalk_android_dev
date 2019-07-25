@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.mobile.docktalk.splashloginsignup.RegisterDoctorActivity;
+import com.mobile.docktalk.splashloginsignup.RegisterDoctorDetailActivity;
 
 public class HomePageFragmentThird extends Fragment {
 
@@ -23,11 +24,20 @@ public class HomePageFragmentThird extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home_3, container, false);
         btnDoctorRegister = (Button) view.findViewById(R.id.btntab3_register_doctor);
+        Button btn = (Button) view.findViewById(R.id.btntab3_update_doctor_image);
         btnDoctorRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), RegisterDoctorActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), RegisterDoctorDetailActivity.class);
+                startActivity(i);
             }
         });
         return view;

@@ -37,7 +37,6 @@ public class RegisterPatientActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
         super.onCreate(savedInstanceState);
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_register_patient);
         setContentView(R.layout.activity_register_patient);
         edPatientAddress = (EditText)findViewById(R.id.patient_address);
         edPatientFirstName = (EditText)findViewById(R.id.patient_first_name);

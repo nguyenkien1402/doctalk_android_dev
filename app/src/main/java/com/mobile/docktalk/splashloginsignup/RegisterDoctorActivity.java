@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apiconsumption.AccountController;
+import com.mobile.docktalk.utility.SavingLocalData;
 
 import org.json.JSONObject;
 
@@ -81,8 +82,8 @@ public class RegisterDoctorActivity extends AppCompatActivity {
         protected JSONObject doInBackground(JSONObject... jsonObjects) {
             JSONObject user = jsonObjects[0];
             if(token != null){
-                JSONObject jsonPatient = AccountController.registerAsDoctor(token, user);
-                return jsonPatient;
+                JSONObject jsonDoctor = AccountController.registerAsDoctor(token, user);
+                return jsonDoctor;
             }else{
                 Log.d("Token","Token is null");
                 return null;
@@ -93,8 +94,9 @@ public class RegisterDoctorActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
             try {
-                Log.d("patient", jsonObject.toString());
+                Log.d("doctor", jsonObject.toString());
                 int doctorId = jsonObject.getInt("doctorId");
+                SavingLocalData.saveInSharePreferences(getApplicationContext(),"UserInfo","DoctorId",doctorId);
                 Intent intent = new Intent(getApplicationContext(),AddingDoctorProfessionalActivity.class);
                 intent.putExtra("DoctorId",doctorId);
                 startActivity(intent);

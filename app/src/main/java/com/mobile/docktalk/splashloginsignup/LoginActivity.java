@@ -63,15 +63,20 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject result) {
             super.onPostExecute(result);
             // save userId in sharepreference
-            try{
-                String userId = result.getString("sub");
-                String email = result.getString("email");
-                saveUserInfoInDevice("UserId",userId);
-                saveUserInfoInDevice("Email",email);
-                signinWithFirebase(email,edPassword.getText().toString());
-            }catch (Exception e){
-                Log.d("Error",e.getMessage());
+            if(result != null){
+                try{
+                    String userId = result.getString("sub");
+                    String email = result.getString("email");
+                    saveUserInfoInDevice("UserId",userId);
+                    saveUserInfoInDevice("Email",email);
+                    signinWithFirebase(email,edPassword.getText().toString());
+                }catch (Exception e){
+                    Log.d("Error",e.getMessage());
+                }
+            }else{
+                Toast.makeText(getApplicationContext(),"Incorrect email or password",Toast.LENGTH_SHORT).show();
             }
+
             // start new activity
 
         }

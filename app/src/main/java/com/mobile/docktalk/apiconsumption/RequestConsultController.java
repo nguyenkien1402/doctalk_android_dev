@@ -38,4 +38,26 @@ public class RequestConsultController {
         }
         return null;
     }
+
+
+    public static JSONObject searchingDoctor(int requestId, String token){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String url = EndPointAPIs.get_searching_doctor_for_request + requestId;
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        try{
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .addHeader("Authorization","Bearer "+token)
+                    .addHeader("Content-Type","application/json")
+                    .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                return new JSONObject(response.body().string());
+            }
+        }catch (Exception e){
+            Log.d("RequestController",e.getMessage());
+        }
+        return null;
+    }
 }

@@ -14,4 +14,7 @@ public class EndPointAPIs {
     public static String adding_doctor_professional = application_url + "api/professionals/doctor/addpro";
     public static String posting_question_consult = application_url + "api/requestconsult";
     public static String get_searching_doctor_for_request = application_url + "api/requestconsult/searchingdoctor/";
+
+    // Firebase messaging service
+    public static String firebase_push_notification = "https://fcm.googleapis.com/fcm/send";
 }

@@ -3,10 +3,15 @@ package com.mobile.docktalk.apiconsumption;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.mobile.docktalk.model.Doctor;
 import com.mobile.docktalk.model.RequestConsult;
 import com.mobile.docktalk.utility.EndPointAPIs;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -40,10 +45,10 @@ public class RequestConsultController {
     }
 
 
-    public static JSONObject searchingDoctor(int requestId, String token){
+    public static List<Doctor> searchingDoctor(int requestId, String token){
+        List<Doctor> doctors = new ArrayList<Doctor>();
         OkHttpClient okHttpClient = new OkHttpClient();
         String url = EndPointAPIs.get_searching_doctor_for_request + requestId;
-        MediaType MEDIA_TYPE = MediaType.parse("application/json");
         try{
             Request request = new Request.Builder()
                     .url(url)
@@ -53,7 +58,12 @@ public class RequestConsultController {
                     .build();
             Response response = okHttpClient.newCall(request).execute();
             if(response.code() == 200){
-                return new JSONObject(response.body().string());
+                JSONArray array = new JSONArray(response.body().string());
+                for(int i = 0 ; i < array.length() ; i++){
+                    Doctor d = new Gson().fromJson(array.get(i).toString(),Doctor.class);
+                    doctors.add(d);
+                }
+                return doctors;
             }
         }catch (Exception e){
             Log.d("RequestController",e.getMessage());

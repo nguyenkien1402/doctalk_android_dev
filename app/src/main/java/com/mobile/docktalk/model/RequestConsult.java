@@ -4,6 +4,7 @@ import java.util.List;
 
 public class RequestConsult {
 
+    private int id;
     private String briefOverview;
     private String inquiry;
     private int urgent;
@@ -11,7 +12,8 @@ public class RequestConsult {
     private String specification;
     private List<RequestConsultDocument> requestConsultDocument;
 
-    public RequestConsult(String briefOverview, String inquiry, int urgent, int patientId, String specification, List<RequestConsultDocument> requestConsultDocument) {
+    public RequestConsult(int id, String briefOverview, String inquiry, int urgent, int patientId, String specification, List<RequestConsultDocument> requestConsultDocument) {
+        this.id = id;
         this.briefOverview = briefOverview;
         this.inquiry = inquiry;
         this.urgent = urgent;
@@ -21,6 +23,14 @@ public class RequestConsult {
     }
 
     public RequestConsult() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBriefOverview() {

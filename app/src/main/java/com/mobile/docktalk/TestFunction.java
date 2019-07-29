@@ -1,7 +1,5 @@
 package com.mobile.docktalk;
 
-import com.google.gson.Gson;
-import com.mobile.docktalk.model.RequestConsult;
 import com.mobile.docktalk.model.RequestConsultDocument;
 import com.mobile.docktalk.utility.ConvertFunctions;
 
@@ -20,8 +18,8 @@ public class TestFunction {
         List<RequestConsultDocument> requestConsultDocuments = new ArrayList<RequestConsultDocument>();
         requestConsultDocuments.add(requestConsultDocument);
 
-        RequestConsult requestConsult = new RequestConsult("Overview","This is content",1,1002,"NULL",requestConsultDocuments);
-        String object = new Gson().toJson(requestConsult);
-        System.out.println(object);
+//        RequestConsult requestConsult = new RequestConsult("Overview","This is content",1,1002,"NULL",requestConsultDocuments);
+//        String object = new Gson().toJson(requestConsult);
+//        System.out.println(object);
     }
 }

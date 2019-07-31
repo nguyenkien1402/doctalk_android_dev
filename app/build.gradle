@@ -119,8 +119,8 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:17.0.1'
     implementation 'com.google.firebase:firebase-auth:18.1.0'
-    implementation 'com.google.firebase:firebase-database:18.0.0'
-    implementation 'com.google.firebase:firebase-storage:18.1.0'
+    implementation 'com.google.firebase:firebase-database:18.0.1'
+    implementation 'com.google.firebase:firebase-storage:18.1.1'
     implementation 'com.google.firebase:firebase-firestore:20.1.0'
 
     // Splash login
@@ -138,7 +138,6 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.coreKtxVersion"
 
     implementation "com.github.johnkil.android-robototextview:robototextview:$rootProject.robotoTextViewVersion"
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     implementation "de.hdodenhof:circleimageview:$rootProject.circleImageVersion"
 
     implementation "com.timehop.stickyheadersrecyclerview:library:$rootProject.stickylistheadersVersion@aar"
@@ -155,6 +154,15 @@ dependencies {
 
     // Library for signalr
     implementation 'com.microsoft.signalr:signalr:1.0.0'
+
+    // For loading image
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    // Bottom Sheet loading image
+    implementation 'gun0912.ted:tedbottompicker:2.0.1'
+    implementation 'gun0912.ted:tedpermission:2.2.0'
 
 }
 

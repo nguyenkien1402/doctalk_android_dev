@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mobile.docktalk">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permission for Quickblox -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.quickblox.sample.chat.java.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".chatfunction.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,13 +21,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".consult_activities.SecondQuestionRequestConsultActivity"
+            android:theme="@style/AppThemeApp"></activity>
+        <activity android:name=".consult_activities.FirstQuestionRequestConsultActivity"
+            android:theme="@style/AppThemeApp"/>
         <activity
-            android:name=".TestFunctionActivity"
+            android:name=".consult_activities.PostingRequestConsultActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppThemeApp"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,7 +48,8 @@
             </intent-filter>
         </activity>
         -->
-        <!--<activity
+        <!--
+        <activity
             android:name=".splashloginsignup.SplashAppActivity"
             android:label="@string/app_name"
             android:theme="@style/AppThemeFullScreen">
@@ -53,105 +58,35 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity
-            android:name=".splashloginsignup.LoginActivity"
+            android:name=".login_signup_activities.LoginActivity"
             android:theme="@style/AppThemeFullScreen" />
         <activity
-            android:name=".splashloginsignup.SignupActivity"
+            android:name=".login_signup_activities.SignupActivity"
             android:theme="@style/AppThemeFullScreen" />
         <activity
-            android:name=".splashloginsignup.PhoneNumberConfirmActivity"
+            android:name=".login_signup_activities.PhoneNumberConfirmActivity"
             android:theme="@style/AppThemeFullScreen" />
         <activity
-            android:name=".splashloginsignup.RegisterDoctorActivity"
+            android:name=".login_signup_activities.RegisterDoctorActivity"
             android:theme="@style/AppThemeFullScreen" />
         <activity
-            android:name=".splashloginsignup.RegisterDoctorDetailActivity"
+            android:name=".login_signup_activities.RegisterDoctorDetailActivity"
             android:theme="@style/AppThemeFullScreen" />
         <activity
-            android:name=".FirebaseUploadDemo"
+            android:name=".app_activities.FirebaseUploadDemo"
             android:theme="@style/AppThemeApp" />
         <activity
-            android:name=".splashloginsignup.RegisterPatientActivity"
+            android:name=".login_signup_activities.RegisterPatientActivity"
             android:theme="@style/AppThemeFullScreen" />
         <activity
-            android:name=".splashloginsignup.AddingDoctorProfessionalActivity"
+            android:name=".login_signup_activities.AddingDoctorProfessionalActivity"
             android:theme="@style/AppThemeApp" />
         <activity
-            android:name=".MainActivity"
+            android:name=".app_activities.MainActivity"
             android:theme="@style/AppThemeApp" />
-        <activity
-            android:name=".PostingRequestConsultActivity"
-            android:theme="@style/AppThemeApp">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity> <!-- Activity for Quickblox -->
-        <activity
-            android:name=".chatfunction.ui.activity.LoginActivity"
-            android:label="@string/login_title"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".chatfunction.ui.activity.SelectUsersActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".chatfunction.ui.activity.DialogsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".chatfunction.ui.activity.ChatActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/ChatActivityTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name=".chatfunction.ui.activity.ChatInfoActivity"
-            android:label="@string/chat_info"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".chatfunction.ui.activity.AttachmentImageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Dark" />
-        <activity
-            android:name=".chatfunction.ui.activity.AppInfoActivity"
-            android:screenOrientation="portrait" />
-
-        <service android:name=".chatfunction.fcm.PushListenerService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name="com.quickblox.messages.services.fcm.QBFcmPushInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-
-        <meta-data
-            android:name="com.quickblox.messages.TYPE"
-            android:value="GCM" />
-        <meta-data
-            android:name="com.quickblox.messages.SENDER_ID"
-            android:value="@string/sender_id" />
-        <meta-data
-            android:name="com.quickblox.messages.QB_ENVIRONMENT"
-            android:value="DEVELOPMENT" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="4b96a3f33893a42103eae91d2166d0c517b833d3" />
     </application>
 
 </manifest>

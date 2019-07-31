@@ -1,7 +1,7 @@
 package com.mobile.docktalk;
 
-import com.mobile.docktalk.model.RequestConsultDocument;
-import com.mobile.docktalk.utility.ConvertFunctions;
+import com.mobile.docktalk.models.RequestConsultDocument;
+import com.mobile.docktalk.utilities.ConvertFunctions;
 
 import java.util.ArrayList;
 import java.util.Calendar;

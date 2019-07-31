@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#efefef"
+        tools:context=".consult_activities.PostingRequestConsultActivity">
 
-        tools:context=".PostingRequestConsultActivity">
+    <include layout="@layout/activity_posting_request_consult_content"/>
+    <include layout="@layout/activity_posting_request_consult_bottom_sheet"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_margin="20dp"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/posting_content"
-                android:layout_width="match_parent"
-                android:layout_height="400dp" />
-
-            <ImageView
-
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/posting_image"
-                android:layout_below="@id/posting_content"
-                android:layout_marginTop="20dp"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_choose_image"
-                android:layout_below="@id/posting_image"
-                android:textSize="22dp"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.MaterialComponents.Button"
-                android:text="Choose Image"/>
-
-        </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

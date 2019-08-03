@@ -20,6 +20,7 @@ import com.mobile.docktalk.app_fragments.HomePageFragmentFirst;
 import com.mobile.docktalk.app_fragments.HomePageFragmentSecond;
 import com.mobile.docktalk.app_fragments.HomePageFragmentThird;
 import com.mobile.docktalk.consult_activities.PostingRequestConsultActivity;
+import com.mobile.docktalk.utilities.SavingLocalData;
 
 import org.json.JSONObject;
 
@@ -86,15 +87,12 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
             // Do something with the result here
-            SharedPreferences pref = getSharedPreferences("UserInfo",MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
             try {
                 Log.d("FirstName",jsonObject.getString("firstName"));
                 Log.d("LastName",jsonObject.getString("lastName"));
-                editor.putString("FirstName", jsonObject.getString("firstName"));
-                editor.putString("LastName", jsonObject.getString("lastName"));
-                editor.putInt("PatientId", jsonObject.getInt("id"));
-                editor.commit();
+                SavingLocalData.saveInSharePreferences(getApplicationContext(),SavingLocalData.ShareUserData,SavingLocalData.FIRSTNAME,jsonObject.getString("firstName"));
+                SavingLocalData.saveInSharePreferences(getApplicationContext(),SavingLocalData.ShareUserData,SavingLocalData.LASTNAME,jsonObject.getString("lastName"));
+                SavingLocalData.saveInSharePreferences(getApplicationContext(),SavingLocalData.ShareUserData,SavingLocalData.PATIENTID,jsonObject.getInt("id"));
             }catch (Exception e){
                 Log.d("Error","Error at getting JSON object");
             }

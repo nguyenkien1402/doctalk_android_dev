@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mobile.docktalk.R;
-import com.mobile.docktalk.models.SpecificTypeModel;
+import com.mobile.docktalk.models.Professional;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ public class RequestConsultSecondPageAdapter extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private List<SpecificTypeModel> title;
+    private List<Professional> title;
 
-    public RequestConsultSecondPageAdapter(Context context, List<SpecificTypeModel> title){
+    public RequestConsultSecondPageAdapter(Context context, List<Professional> title){
         this.context = context;
         this.title = title;
     }
@@ -45,14 +45,13 @@ public class RequestConsultSecondPageAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_request_consult_second_page, null, false);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.rq2_title);
+            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.rq2_image);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
         viewHolder.textView.setText(title.get(position).getTitle());
-
-//        ImageView iv = (ImageView) view.findViewById(R.id.rq2_image);
-//        iv.setImageResource(context.getResources().getI title.get(position).getImageUrl());
+        viewHolder.imageView.setImageResource(title.get(position).getIcon());
         return convertView;
     }
 

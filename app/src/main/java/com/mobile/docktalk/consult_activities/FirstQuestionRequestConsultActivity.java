@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.adapter.RequestConsultFirstPageAdapter;
+import com.mobile.docktalk.models.RequestConsultForm;
 
 public class FirstQuestionRequestConsultActivity extends AppCompatActivity {
 
@@ -24,14 +24,18 @@ public class FirstQuestionRequestConsultActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.rq1_list);
         RequestConsultFirstPageAdapter adapter = new RequestConsultFirstPageAdapter(getApplicationContext(),titles,flags);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),titles[position],Toast.LENGTH_SHORT).show();
+                Bundle bundle = getIntent().getExtras();
+                RequestConsultForm requestConsultForm = bundle.getParcelable("RequestConsultForm");
+                requestConsultForm.setSpecification(titles[position]);
+
                 Intent intent = new Intent(getApplicationContext(),SecondQuestionRequestConsultActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
+
     }
 }

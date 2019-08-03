@@ -20,7 +20,6 @@ import com.microsoft.signalr.HubConnectionBuilder;
 import com.microsoft.signalr.HubConnectionState;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apis_controller.RequestConsultController;
-import com.mobile.docktalk.apis_controller.UtilityController;
 import com.mobile.docktalk.models.Doctor;
 import com.mobile.docktalk.models.RequestConsult;
 
@@ -60,8 +59,8 @@ public class HomePageFragmentSecond extends Fragment {
             public void onClick(View v) {
                 if(hubConnection.getConnectionState() == HubConnectionState.DISCONNECTED)
                     hubConnection.start();
-                MatchingDoctorAsync matchingDoctorAsync = new MatchingDoctorAsync();
-                matchingDoctorAsync.execute();
+//                MatchingDoctorAsync matchingDoctorAsync = new MatchingDoctorAsync();
+//                matchingDoctorAsync.execute();
             }
         });
 
@@ -147,8 +146,8 @@ public class HomePageFragmentSecond extends Fragment {
         private class SendingNotiAsync extends AsyncTask<Doctor, Void, Boolean>{
             @Override
             protected Boolean doInBackground(Doctor... doctors) {
-                boolean result = UtilityController.sendingNotificationToDoctor(doctors[0].getUserId(),requestConsult, patientId);
-                return result;
+//                boolean result = UtilityController.sendingNotificationToDoctor(doctors[0].getUserId(),requestConsult, patientId);
+                return null;
             }
 
             @Override

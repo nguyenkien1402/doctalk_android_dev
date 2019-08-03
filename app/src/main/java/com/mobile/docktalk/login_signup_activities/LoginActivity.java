@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.mobile.docktalk.app_activities.MainActivity;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apis_controller.UtilityController;
+import com.mobile.docktalk.utilities.SavingLocalData;
 
 import org.json.JSONObject;
 
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(String... strings) {
             token = UtilityController.getTokenMobile(strings[0],strings[1]);
-            saveUserInfoInDevice("Token",token);
+            saveUserInfoInDevice(SavingLocalData.TOKEN,token);
             JSONObject result = UtilityController.getUserTokenInfo(token);
             if(result != null){
                 return result;
@@ -67,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                 try{
                     String userId = result.getString("sub");
                     String email = result.getString("email");
-                    saveUserInfoInDevice("UserId",userId);
-                    saveUserInfoInDevice("Email",email);
+                    saveUserInfoInDevice(SavingLocalData.USERID,userId);
+                    saveUserInfoInDevice(SavingLocalData.EMAIL,email);
                     signinWithFirebase(email,edPassword.getText().toString());
                 }catch (Exception e){
                     Log.d("Error",e.getMessage());
@@ -76,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(getApplicationContext(),"Incorrect email or password",Toast.LENGTH_SHORT).show();
             }
-
-            // start new activity
 
         }
     }
@@ -99,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveUserInfoInDevice(String key, String userId){
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("UserInfo",MODE_PRIVATE);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(SavingLocalData.ShareUserData,MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(key,userId);
         editor.commit();

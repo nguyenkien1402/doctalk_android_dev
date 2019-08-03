@@ -1,7 +1,6 @@
 package com.mobile.docktalk.consult_activities;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,11 +22,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.StorageReference;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.mobile.docktalk.R;
+import com.mobile.docktalk.models.RequestConsultForm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,15 +35,6 @@ import gun0912.tedbottompicker.TedBottomPicker;
 public class PostingRequestConsultActivity extends AppCompatActivity {
 
     EditText postingContent;
-    String content = "";
-    String userId;
-    String token;
-    int Image_Request_Code = 7;
-    ProgressDialog progressDialog ;
-    ImageView SelectImage;
-    Uri FilePathUri;
-    StorageReference storageReference;
-    FirebaseFirestore db;
     LinearLayout layoutBottomSheet, bottomSheetTitle;
     BottomSheetBehavior sheetBehavior;
     TextView photoRow;
@@ -59,24 +48,63 @@ public class PostingRequestConsultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initView();
+        buttonSelectPhotoActioner();
+        bottomSheetActioner();
+    }
+
+    /*
+     * Initialize all the widget of the view
+     */
+    private void initView(){
         setContentView(R.layout.activity_posting_request_consult);
         layoutBottomSheet = (LinearLayout) findViewById(R.id.posting_bottom_sheet);
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         bottomSheetTitle = (LinearLayout) findViewById(R.id.posting_bottom_title);
+        postingContent = (EditText) findViewById(R.id.posting_content);
         photoRow = (TextView) findViewById(R.id.posting_photo);
-
         mSelectedImagesContainer = findViewById(R.id.posting_selected_photos_container);
         requestManager = Glide.with(this);
+    }
 
+    /*
+     * Selected Photo button listener
+     */
+    private void buttonSelectPhotoActioner(){
         photoRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Now open the photo fragment.
-                Toast.makeText(getApplicationContext(),"Photo Add",Toast.LENGTH_SHORT).show();
-                showMultiImageModal();
+                PermissionListener permissionListener = new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        TedBottomPicker.with(PostingRequestConsultActivity.this)
+                                .setPeekHeight(getResources().getDisplayMetrics().heightPixels)
+                                .showTitle(false)
+                                .setCompleteButtonText("Done")
+                                .setEmptySelectionText("No Select")
+                                .setSelectedUriList(selectedUriList)
+                                .showMultiImage(uriList -> {
+                                    selectedUriList = uriList;
+                                    showUriList(uriList);
+                                });
+                    }
+
+
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                        Toast.makeText(getApplicationContext(),"Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_LONG).show();
+                    }
+                };
+
+                checkPermission(permissionListener);
             }
         });
+    }
 
+    /*
+     * Bottom Sheet Action
+     */
+    private void bottomSheetActioner(){
         bottomSheetTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +115,6 @@ public class PostingRequestConsultActivity extends AppCompatActivity {
 
             }
         });
-
-
 
         sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -113,35 +139,9 @@ public class PostingRequestConsultActivity extends AppCompatActivity {
             public void onSlide(@NonNull View view, float v) {
 
             }
-
         });
-
     }
 
-    private void showMultiImageModal(){
-        PermissionListener permissionListener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                TedBottomPicker.with(PostingRequestConsultActivity.this)
-                        .setPeekHeight(getResources().getDisplayMetrics().heightPixels)
-                        .showTitle(false)
-                        .setCompleteButtonText("Done")
-                        .setEmptySelectionText("No Select")
-                        .setSelectedUriList(selectedUriList)
-                        .showMultiImage(uriList -> {
-                            selectedUriList = uriList;
-                            showUriList(uriList);
-                        });
-            }
-
-
-            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                Toast.makeText(getApplicationContext(),"Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_LONG).show();
-            }
-        };
-
-        checkPermission(permissionListener);
-    }
 
     private void showUriList(List<Uri> uriList) {
         mSelectedImagesContainer.removeAllViews();
@@ -173,10 +173,15 @@ public class PostingRequestConsultActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.posting_consult_send){
+            String content = postingContent.getText().toString();
+            RequestConsultForm requestConsultForm = new RequestConsultForm();
+            requestConsultForm.setContent(content);
+            requestConsultForm.setImageUrls(selectedUriList);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("RequestConsultForm",requestConsultForm);
             Intent intent = new Intent(getApplicationContext(),FirstQuestionRequestConsultActivity.class);
+            intent.putExtras(bundle);
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"Send",Toast.LENGTH_SHORT).show();
-//            UploadImageFileToFirebaseStorage();
             return true;
         }
 

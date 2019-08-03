@@ -10,8 +10,8 @@ public class Messages {
     public static String firebase_database_document_collection  = "Doctor_Documents";
 
     // Request Consult Information
-    public static String firebase_storage_request_consult_document_path = "Request_Consult_Document";
-    public static String firebase_database_consult_document_collection = "Request_Document";
-    public static String firebase_database_consult_patient_document = "Image";
+    public static String firebase_storage_request_consult_document_path = "All_Request_Images/";
+    public static String firebase_database_consult_document_collection = "Request_Documents";
+    public static String firebase_database_consult_patient_document = "Images";
     public static String firebase_database_consult_patient_user_collection = "User_";
 }

@@ -10,15 +10,17 @@ public class RequestConsult {
     private int urgent;
     private int patientId;
     private String specification;
+    public int professionalId;
     private List<RequestConsultDocument> requestConsultDocument;
 
-    public RequestConsult(int id, String briefOverview, String inquiry, int urgent, int patientId, String specification, List<RequestConsultDocument> requestConsultDocument) {
+    public RequestConsult(int id, String briefOverview, String inquiry, int urgent, int patientId, String specification,int professionalId, List<RequestConsultDocument> requestConsultDocument) {
         this.id = id;
         this.briefOverview = briefOverview;
         this.inquiry = inquiry;
         this.urgent = urgent;
         this.patientId = patientId;
         this.specification = specification;
+        this.professionalId = professionalId;
         this.requestConsultDocument = requestConsultDocument;
     }
 
@@ -79,5 +81,13 @@ public class RequestConsult {
 
     public void setRequestConsultDocument(List<RequestConsultDocument> requestConsultDocument) {
         this.requestConsultDocument = requestConsultDocument;
+    }
+
+    public int getProfessionalId() {
+        return professionalId;
+    }
+
+    public void setProfessionalId(int professionalId) {
+        this.professionalId = professionalId;
     }
 }

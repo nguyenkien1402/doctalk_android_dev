@@ -2,7 +2,7 @@ package com.mobile.docktalk.apis_controller;
 
 import android.util.Log;
 
-import com.mobile.docktalk.models.RequestConsult;
+import com.mobile.docktalk.models.RequestConsultForm;
 import com.mobile.docktalk.utilities.EndPointAPIs;
 
 import org.json.JSONObject;
@@ -64,19 +64,19 @@ public class UtilityController {
         return null;
     }
 
-    public static boolean sendingNotificationToDoctor(String doctorId, RequestConsult requestConsult, String patientId){
+    public static boolean sendingNotificationToDoctor(String userDoctorId, RequestConsultForm requestConsult, String userPatientId, int requestId){
         JSONObject notic = new JSONObject();
         JSONObject data = new JSONObject();
         OkHttpClient okHttpClient = new OkHttpClient();
         try{
-            data.put("id",requestConsult.getId());
-            data.put("title", requestConsult.getBriefOverview());
-            data.put("content", requestConsult.getInquiry());
+            data.put("id",requestId);
+            data.put("title", "New request: "+requestConsult.getSpecification());
+            data.put("content", requestConsult.getContent());
             data.put("imageUrl","http://h5.4j.com/thumb/Ninja-Run.jpg");
             data.put("gameUrl","https://h5.4j.com/Ninja-Run/index.php?pubid=noa");
-            data.put("patientId",patientId);
+            data.put("patientId",userPatientId);
             notic.put("data",data);
-            notic.put("to","/topics/doctor_"+doctorId);
+            notic.put("to","/topics/doctor_"+userDoctorId);
 
             // Do Post Request
             MediaType MEDIA_TYPE = MediaType.parse("application/json");

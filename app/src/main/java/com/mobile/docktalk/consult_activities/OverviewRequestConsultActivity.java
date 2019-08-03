@@ -35,7 +35,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mobile.docktalk.R;
 import com.mobile.docktalk.apis_controller.RequestConsultController;
-import com.mobile.docktalk.apis_controller.UtilityController;
 import com.mobile.docktalk.models.Doctor;
 import com.mobile.docktalk.models.ImageUploadInfo;
 import com.mobile.docktalk.models.RequestConsultForm;
@@ -275,7 +274,7 @@ public class OverviewRequestConsultActivity extends AppCompatActivity {
                 for(int i = 0 ; i < doctors.size() ; i ++){
                     if(isShutDown)
                         break;
-                    UtilityController.sendingNotificationToDoctor(doctors.get(i).getUserId(),requestConsultForm,userId,requestId);
+                    RequestConsultController.sendingNotificationToDoctor(doctors.get(i).getUserId(),requestConsultForm,userId,requestId);
                     Thread.sleep(20000);
                 }
             } catch (InterruptedException e) {

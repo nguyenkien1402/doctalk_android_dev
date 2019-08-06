@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.microsoft.signalr.HubConnection;
 import com.microsoft.signalr.HubConnectionBuilder;
 import com.microsoft.signalr.HubConnectionState;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.apis_controller.RequestConsultController;
 import com.mobile.docktalk.models.Doctor;
 import com.mobile.docktalk.models.RequestConsult;

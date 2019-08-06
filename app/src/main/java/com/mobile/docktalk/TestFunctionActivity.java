@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.microsoft.signalr.HubConnection;
 import com.microsoft.signalr.HubConnectionBuilder;
 import com.microsoft.signalr.HubConnectionState;
+import com.mobile.R;
 
 import org.json.JSONObject;
 

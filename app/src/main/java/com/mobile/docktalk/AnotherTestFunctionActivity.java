@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mobile.R;
+
 import java.util.Random;
 
 public class AnotherTestFunctionActivity extends AppCompatActivity {

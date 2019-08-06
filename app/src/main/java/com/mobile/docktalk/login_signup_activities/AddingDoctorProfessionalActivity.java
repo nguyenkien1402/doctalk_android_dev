@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.adapter.ProfessionalAdapter;
 import com.mobile.docktalk.apis_controller.ProfessionalController;
 import com.mobile.docktalk.models.Professional;

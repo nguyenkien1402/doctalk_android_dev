@@ -33,7 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.apis_controller.RequestConsultController;
 import com.mobile.docktalk.models.Doctor;
 import com.mobile.docktalk.models.ImageUploadInfo;

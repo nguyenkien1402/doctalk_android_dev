@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 
 public class SplashAppActivity extends AppCompatActivity {
 

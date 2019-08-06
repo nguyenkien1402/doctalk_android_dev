@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.login_signup_activities.RegisterDoctorActivity;
 import com.mobile.docktalk.login_signup_activities.RegisterDoctorDetailActivity;
 

@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.LayoutInflaterCompat;
 
 import com.mikepenz.iconics.context.IconicsLayoutInflater2;
-import com.mobile.docktalk.app_activities.MainActivity;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.apis_controller.AccountController;
+import com.mobile.docktalk.app_activities.MainActivity;
 
 import org.json.JSONObject;
 

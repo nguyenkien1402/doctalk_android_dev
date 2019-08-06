@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 
 public class RequestConsultFirstPageAdapter extends BaseAdapter {
 

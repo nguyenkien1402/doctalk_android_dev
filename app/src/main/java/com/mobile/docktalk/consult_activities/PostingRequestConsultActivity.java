@@ -24,7 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.models.RequestConsultForm;
 
 import java.util.ArrayList;

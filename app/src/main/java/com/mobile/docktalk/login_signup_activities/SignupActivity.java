@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 
 public class SignupActivity extends AppCompatActivity {
     EditText edUsername, edEmail, edPasssword, edConfirmPassword, edPhoneNumber;

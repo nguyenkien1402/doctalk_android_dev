@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.apis_controller.AccountController;
 import com.mobile.docktalk.apis_controller.UtilityController;
 

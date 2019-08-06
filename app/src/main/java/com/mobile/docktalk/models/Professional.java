@@ -1,6 +1,7 @@
 package com.mobile.docktalk.models;
 
-import com.mobile.docktalk.R;
+
+import com.mobile.R;
 
 import java.util.ArrayList;
 import java.util.List;

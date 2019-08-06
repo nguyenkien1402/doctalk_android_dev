@@ -18,9 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.mobile.docktalk.app_activities.MainActivity;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.apis_controller.UtilityController;
+import com.mobile.docktalk.app_activities.MainActivity;
 import com.mobile.docktalk.utilities.SavingLocalData;
 
 import org.json.JSONObject;

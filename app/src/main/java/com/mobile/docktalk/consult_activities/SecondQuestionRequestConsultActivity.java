@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.adapter.RequestConsultSecondPageAdapter;
 import com.mobile.docktalk.models.Professional;
 import com.mobile.docktalk.models.RequestConsultForm;

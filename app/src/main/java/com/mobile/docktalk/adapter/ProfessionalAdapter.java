@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.models.Professional;
 
 import java.util.ArrayList;

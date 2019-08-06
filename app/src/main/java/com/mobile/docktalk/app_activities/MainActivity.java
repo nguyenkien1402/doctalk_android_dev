@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mobile.docktalk.R;
+import com.mobile.R;
 import com.mobile.docktalk.apis_controller.AccountController;
 import com.mobile.docktalk.app_fragments.HomePageFragmentFirst;
 import com.mobile.docktalk.app_fragments.HomePageFragmentSecond;

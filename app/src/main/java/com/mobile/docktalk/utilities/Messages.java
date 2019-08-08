@@ -14,4 +14,6 @@ public class Messages {
     public static String firebase_database_consult_document_collection = "Request_Documents";
     public static String firebase_database_consult_patient_document = "Images";
     public static String firebase_database_consult_patient_user_collection = "User_";
+
+
 }

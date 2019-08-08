@@ -14,11 +14,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mobile.R;
+import com.mobile.cometchat.Contracts.StringContract;
 import com.mobile.docktalk.apis_controller.UtilityController;
 import com.mobile.docktalk.app_activities.MainActivity;
 import com.mobile.docktalk.utilities.SavingLocalData;
@@ -29,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText edUsername, edPassword;
     String token;
+    private String TAG = "AppLogin";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,25 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = edUsername.getText().toString();
                 String password = edPassword.getText().toString();
+                // Login to cometchat
+                loginCometChat(username);
+
                 GetTokenAsync getTokenAsync = new GetTokenAsync();
                 getTokenAsync.execute(new String[]{username,password});
+            }
+        });
+    }
+
+    private void loginCometChat(String username) {
+        CometChat.login(username, StringContract.AppDetails.API_KEY, new CometChat.CallbackListener<User>() {
+            @Override
+            public void onSuccess(User user) {
+                Log.d(TAG, "Login completed successfully for user: " + user.toString());
+            }
+
+            @Override
+            public void onError(CometChatException e) {
+                Log.d(TAG, "Login failed with exception: " + e.getMessage());
             }
         });
     }
@@ -70,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     String email = result.getString("email");
                     saveUserInfoInDevice(SavingLocalData.USERID,userId);
                     saveUserInfoInDevice(SavingLocalData.EMAIL,email);
+                    saveUserInfoInDevice(SavingLocalData.USERNAME,edUsername.getText().toString());
                     signinWithFirebase(email,edPassword.getText().toString());
                 }catch (Exception e){
                     Log.d("Error",e.getMessage());
@@ -88,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            // Login to the cometchat and
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }else{

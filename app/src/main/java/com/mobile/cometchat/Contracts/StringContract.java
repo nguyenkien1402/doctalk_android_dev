@@ -55,6 +55,6 @@ public class StringContract {
 
     public static class AppDetails{
         public static final String APP_ID  =  "6124e0b7528f9e";
-        public static final String API_KEY =  "deccea09464d7e30bf42bf3dfdc89dfcff70d7f4";
+        public static final String API_KEY =  "de7d20195aa68eae630cf26c68f7edbdeac73e5e";
     }
 }

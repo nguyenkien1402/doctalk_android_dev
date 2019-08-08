@@ -18,9 +18,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
         super.onCreate(savedInstanceState);
-//        binding = DataBindingUtil.setContentView(this, R .layout.activity_signup);
         setContentView(R .layout.activity_signup);
         edUsername = (EditText) findViewById(R.id.signup_username);
         edEmail = (EditText) findViewById(R.id.signup_email_address);

@@ -1,8 +1,8 @@
 package com.mobile.docktalk.utilities;
 
 public class EndPointAPIs {
-    public static String account_url = "http://192.168.132.1:5000/";
-    public static String application_url = "http://192.168.132.1:5001/";
+    public static String account_url = "http://172.18.11.161:5000/";
+    public static String application_url = "http://172.18.11.161:5001/";
     public static String signup_url = account_url + "authentication/api/register";
     public static String register_patient = application_url + "api/account/register/patient";
     public static String register_doctor = application_url + "api/account/register/doctor";
@@ -17,4 +17,12 @@ public class EndPointAPIs {
 
     // Firebase messaging service
     public static String firebase_push_notification = "https://fcm.googleapis.com/fcm/send";
+
+    // CometChat API
+    public static String cometchat_users_create = "https://api.cometchat.com/v1.8/users";
+    public static String cometchat_users_get = "https://api.cometchat.com/v1.8/users/";
+    public static String cometchat_users_update = "https://api.cometchat.com/v1.8/users/uid";
+    public static String cometchat_auth_token_create = "https://api.cometchat.com/v1.8/users/{0}/auth_tokens";
+    public static String cometchat_auth_token_get = "https://api.cometchat.com/v1.8/users/{0}/auth_tokens/authToken";
+
 }

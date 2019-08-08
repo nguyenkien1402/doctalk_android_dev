@@ -30,8 +30,11 @@ android {
             aidl.srcDirs = ['src/main.aidl', 'apt_generated']
             assets.srcDirs = ['src/main/assets']
             res.srcDirs=[
-                    'src/main/res-cometchat',
-                    'src/main/res'
+                    'src/main/res/layout/activity',
+                    'src/main/res/layout/fragment',
+                    'src/main/res/layout',
+                    'src/main/res',
+                    'src/main/res-cometchat'
             ]
 
         }

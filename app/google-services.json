@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:314573789532:android:a29d41b75d56ee35",
+        "mobilesdk_app_id": "1:314573789532:android:e66111ad3c5e20b9",
         "android_client_info": {
-          "package_name": "com.example.doc"
+          "package_name": "com.mobile.docktalk"
         }
       },
       "oauth_client": [
@@ -37,9 +37,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:314573789532:android:e66111ad3c5e20b9",
+        "mobilesdk_app_id": "1:314573789532:android:54649322bf5cc7ee",
         "android_client_info": {
-          "package_name": "com.mobile.docktalk"
+          "package_name": "com.mobile.doctalk_doctor"
         }
       },
       "oauth_client": [

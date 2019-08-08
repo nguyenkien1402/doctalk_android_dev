@@ -12,6 +12,8 @@ public class SavingLocalData {
     public static String EMAIL = "Email";
     public static String FIRSTNAME = "FirstName";
     public static String LASTNAME = "LastName";
+    public static String USERNAME = "UserName";
+    public static String COMETCHAT_TOKEN = "CometChatToken";
     public static void saveInSharePreferences(Context context,String name, String key, String value){
         SharedPreferences pref = context.getSharedPreferences(name,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

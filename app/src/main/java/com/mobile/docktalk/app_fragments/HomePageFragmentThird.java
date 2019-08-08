@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.mobile.R;
+import com.mobile.cometchat.Activity.LoginActivity;
 import com.mobile.docktalk.login_signup_activities.RegisterDoctorActivity;
 import com.mobile.docktalk.login_signup_activities.RegisterDoctorDetailActivity;
 
@@ -26,6 +27,7 @@ public class HomePageFragmentThird extends Fragment {
         view = inflater.inflate(R.layout.fragment_home_3, container, false);
         btnDoctorRegister = (Button) view.findViewById(R.id.btntab3_register_doctor);
         Button btn = (Button) view.findViewById(R.id.btntab3_update_doctor_image);
+        Button btnCometChat = (Button) view.findViewById(R.id.btntab3_cometchat);
         btnDoctorRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +41,14 @@ public class HomePageFragmentThird extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), RegisterDoctorDetailActivity.class);
                 startActivity(i);
+            }
+        });
+
+        btnCometChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
             }
         });
         return view;

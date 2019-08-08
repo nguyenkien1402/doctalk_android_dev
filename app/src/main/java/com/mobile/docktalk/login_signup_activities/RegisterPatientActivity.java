@@ -1,6 +1,7 @@
 package com.mobile.docktalk.login_signup_activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,9 @@ import androidx.core.view.LayoutInflaterCompat;
 import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import com.mobile.R;
 import com.mobile.docktalk.apis_controller.AccountController;
+import com.mobile.docktalk.apis_controller.CometChatController;
 import com.mobile.docktalk.app_activities.MainActivity;
+import com.mobile.docktalk.utilities.SavingLocalData;
 
 import org.json.JSONObject;
 
@@ -28,7 +31,7 @@ public class RegisterPatientActivity extends AppCompatActivity {
 
     EditText edPatientFirstName, edPatientLastName, edPatientPreferName,
             edPatientAddress, edPatientSuburb, edPatientState, edPatientPostCode;
-    String firstName, lastName, preferName, address, suburb, state, postcode;
+    String firstName, lastName, preferName, address, suburb, state, postcode, userName, email;
     Button btnPatientSignup;
     JSONObject user = new JSONObject();
     private String userId = null, token = null;
@@ -51,6 +54,9 @@ public class RegisterPatientActivity extends AppCompatActivity {
         userId = getIntent().getStringExtra("Id");
         token = getIntent().getStringExtra("Token");
 
+        SharedPreferences pref = getSharedPreferences(SavingLocalData.ShareUserData, MODE_PRIVATE);
+        userName = pref.getString(SavingLocalData.USERNAME, null);
+        email = pref.getString(SavingLocalData.EMAIL,null);
 
         btnPatientSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,11 +101,35 @@ public class RegisterPatientActivity extends AppCompatActivity {
             super.onPostExecute(jsonObject);
             try{
                if(jsonObject != null){
-                   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                   startActivity(intent);
+                   CometChatAsync cometChatAsync = new CometChatAsync();
+                   cometChatAsync.execute();
                }
             }catch (Exception e){
                 Log.d("Error",e.getMessage());
+            }
+        }
+
+        private class CometChatAsync extends AsyncTask<Void,Void,String>{
+            @Override
+            protected String doInBackground(Void... voids) {
+                CometChatController.createCometChatAccount(userName,firstName +" "+lastName, email);
+                JSONObject object = CometChatController.createUserAuthToken(userName);
+                try{
+                    String cometchatToken = object.getJSONObject("data").getString("authToken");
+                    return cometchatToken;
+                }catch (Exception e){
+                    Log.d("RegisterPatient",e.getMessage());
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                SavingLocalData.saveInSharePreferences(getApplicationContext(),SavingLocalData.ShareUserData,
+                        SavingLocalData.COMETCHAT_TOKEN,s);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                super.onPostExecute(s);
             }
         }
     }
